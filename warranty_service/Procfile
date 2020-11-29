@@ -1,0 +1,1 @@
+web: gunicorn warranty_service.wsgi --log-file -
