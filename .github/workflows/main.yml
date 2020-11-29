@@ -27,7 +27,7 @@ jobs:
           heroku_api_key: 247a04c4-a068-43ae-958b-24e7af9ab989
           heroku_app_name: lab2-warranty-litvinov
           heroku_email: boris.litvinov2017@yandex.ru
-          appdir: warranty_service
+          appdir: ../warranty_service
       - name: Migrate Warehouse
         run: |
           cd warehouse_service/
