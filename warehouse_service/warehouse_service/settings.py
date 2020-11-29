@@ -25,7 +25,7 @@ SECRET_KEY = 't69-ogfldjxft81xkeurns(55ip^8uij9rdczl2)85bm^o(q*x'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1','.herokuapp.com']
 
 
 # Application definition
@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'warehouse_api.apps.WarehouseApiConfig',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -75,9 +77,13 @@ WSGI_APPLICATION = 'warehouse_service.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'dc1b99u56n4h1l',
+        'USER': 'oqoyohswzbfizh',
+        'PASSWORD': 'c1ea06891bd2864b5da7e928d50ea4a30ea03268defdef98b5091c5d3d824d9b',
+        'HOST': 'ec2-54-225-214-37.compute-1.amazonaws.com',
+        'PORT': '5432',
+}
 }
 
 

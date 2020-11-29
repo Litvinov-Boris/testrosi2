@@ -6,13 +6,46 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - run: |
+        git fetch --prune --unshallow
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install dj-database-url
+          pip install -r warranty_service/requirements.txt
+      - name: Migrate Warranty
+        run: |
+          cd warranty_service/
+          python3 manage.py migrate
+      - name: Deploy Warranty service
+        uses: akhileshns/heroku-deploy@v3.4.6
+        with:
+          heroku_api_key: 247a04c4-a068-43ae-958b-24e7af9ab989
+          heroku_app_name: lab2-warranty-litvinov
+          heroku_email: boris.litvinov2017@yandex.ru
+          appdir: warranty_service
+      - name: Migrate Warehouse
+        run: |
+          cd warehouse_service/
+          python3 manage.py migrate
+      - name: Deploy Warehouse service
+        uses: akhileshns/heroku-deploy@v3.4.6
+        with:
+          heroku_api_key: 247a04c4-a068-43ae-958b-24e7af9ab989
+          heroku_app_name: lab2-warehouse-litvinov
+          heroku_email: boris.litvinov2017@yandex.ru
+          appdir: warehouse_service
       # TODO Build projects
       # TODO deploy to Heroku
-      - name: Run API Tests
-        id: run-newman
-        uses: anthonyvscode/newman-action@v1
-        with:
-          collection: postman/postman-collection.json
-          environment: postman/postman-heroku-environment.json
-          delayRequest: 50
-          reporters: cli
+      #- name: Run API Tests
+      #  id: run-newman
+      #  uses: anthonyvscode/newman-action@v1
+      #  with:
+      #    collection: postman/postman-collection.json
+      #    environment: postman/postman-heroku-environment.json
+      #    delayRequest: 50
+      #    reporters: cli
