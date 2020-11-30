@@ -53,12 +53,12 @@ import json
 
 # @api_view(['DELETE'])
 # def req_refund(request, user_uid, orderUid):
-    user = Store.objects.get(user_uid = userUid)
-    if Store.DoesNotExist():
-        return Response({"message":"User not found"}, status=status.HTTP_404_NOT_FOUND)
+#     user = Store.objects.get(user_uid = userUid)
+#     if Store.DoesNotExist():
+#         return Response({"message":"User not found"}, status=status.HTTP_404_NOT_FOUND)
     
-    orderDel = requests.delete('https://lab2-orders-litvinov.herokuapp.com/api/v1/orders/{}'.format(orderUid))
-    if orderDel.status_code == 404:
-        return Response({"message":"Order not found"}, status=status.HTTP_409_CONFLICT)
+#     orderDel = requests.delete('https://lab2-orders-litvinov.herokuapp.com/api/v1/orders/{}'.format(orderUid))
+#     if orderDel.status_code == 404:
+#         return Response({"message":"Order not found"}, status=status.HTTP_409_CONFLICT)
     
-    return Response({"message":"Item returned"},status=status.HTTP_204_NO_CONTENT)
+#     return Response({"message":"Item returned"},status=status.HTTP_204_NO_CONTENT)
