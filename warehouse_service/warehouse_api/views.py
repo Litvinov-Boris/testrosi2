@@ -78,7 +78,7 @@ def req_warr(request, orderItemUid):
     item = Items.objects.get(id = orderdata['item_id'])
     itemdata = Itemserializer(item).data
     reqwarranty = dict(availableCount = itemdata['available_count'],reason = parsReq['reason'])
-    requestWar = requests.post('http:https://127.0.0.1/api/v1/warranty/{}/warranty'.format(orderItemUid), json=reqwarranty)
+    requestWar = requests.post('https://lab2-warranty-litvinov.herokuapp.com/api/v1/warranty/{}/warranty'.format(orderItemUid), json=reqwarranty)
     if requestWar.status_code == 404:
         return Response({'message':'Warranty item not found'}, status=status.HTTP_404_NOT_FOUND)
     return Response(requestWar.json(),status=status.HTTP_200_OK)

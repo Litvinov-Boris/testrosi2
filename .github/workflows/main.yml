@@ -39,6 +39,28 @@ jobs:
           heroku_app_name: lab2-warehouse-litvinov
           heroku_email: boris.litvinov2017@yandex.ru
           appdir: warehouse_service
+      - name: Migrate Orders
+        run: |
+          cd order_service/
+          python3 manage.py migrate
+      - name: Deploy Orders service
+        uses: akhileshns/heroku-deploy@v3.4.6
+        with:
+          heroku_api_key: 247a04c4-a068-43ae-958b-24e7af9ab989
+          heroku_app_name: lab2-orders-litvinov
+          heroku_email: boris.litvinov2017@yandex.ru
+          appdir: order_service
+      - name: Migrate Store
+        run: |
+          cd store_service/
+          python3 manage.py migrate
+      - name: Deploy Store service
+        uses: akhileshns/heroku-deploy@v3.4.6
+        with:
+          heroku_api_key: 247a04c4-a068-43ae-958b-24e7af9ab989
+          heroku_app_name: lab2-store-litvinov
+          heroku_email: boris.litvinov2017@yandex.ru
+          appdir: store_service
       # TODO Build projects
       # TODO deploy to Heroku
       #- name: Run API Tests
