@@ -7,34 +7,34 @@ from .models import Warranty
 from rest_framework.parsers import JSONParser
 
 # Create your views here.
-@api_view(['POST'])
-def req_warranty(request, itemUid):
-    reqPars = JSONParser().parse(request)
-    try:
-        item = Warranty.objects.get(item_uid = itemUid)
-    except Warranty.DoesNotExist:
-        return Response({"message":"Warranty info not found"}, status = status.HTTP_404_NOT_FOUND)
+# @api_view(['POST'])
+# def req_warranty(request, itemUid):
+#     reqPars = JSONParser().parse(request)
+#     try:
+#         item = Warranty.objects.get(item_uid = itemUid)
+#     except Warranty.DoesNotExist:
+#         return Response({"message":"Warranty info not found"}, status = status.HTTP_404_NOT_FOUND)
     
-    warrData = WarrantySerializer(item).data
-    if 'reason' in reqPars:
-        warrData['comment'] = reqPars['reason']
-    decision = dict(warrantyDate = warrData['warranty_date'])
-    if warrData['status'] == 'ON_WARRANTY':
-        warrData['status'] = 'USE_WARRANTY'
-        warser = WarrantySerializer(item, data = warrData)
-        if warser.is_valid():
-            warser.save()
-        if (('availableCount' in reqPars) and (reqPars['availableCount'] > 0)):
-            decision['decision'] = 'RETURN'
-        else:
-            decision['decision'] = 'FIXING'
-    else:
-        decision['decision'] = 'REFUSED'
-    return Response(decision, status=status.HTTP_200_OK)
+#     warrData = WarrantySerializer(item).data
+#     if 'reason' in reqPars:
+#         warrData['comment'] = reqPars['reason']
+#     decision = dict(warrantyDate = warrData['warranty_date'])
+#     if warrData['status'] == 'ON_WARRANTY':
+#         warrData['status'] = 'USE_WARRANTY'
+#         warser = WarrantySerializer(item, data = warrData)
+#         if warser.is_valid():
+#             warser.save()
+#         if (('availableCount' in reqPars) and (reqPars['availableCount'] > 0)):
+#             decision['decision'] = 'RETURN'
+#         else:
+#             decision['decision'] = 'FIXING'
+#     else:
+#         decision['decision'] = 'REFUSED'
+#     return Response(decision, status=status.HTTP_200_OK)
 
 
-@api_view(['GET', 'POST', 'DELETE'])
-def get_post_del(request, itemUid):
+# @api_view(['GET', 'POST', 'DELETE'])
+# def get_post_del(request, itemUid):
     if request.method == 'GET':
         try:
             item = Warranty.objects.get(item_uid = itemUid)
