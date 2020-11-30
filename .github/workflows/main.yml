@@ -47,7 +47,7 @@ jobs:
         uses: akhileshns/heroku-deploy@v3.4.6
         with:
           heroku_api_key: 247a04c4-a068-43ae-958b-24e7af9ab989
-          heroku_app_name: lab2-orders-litvinov
+          heroku_app_name: lab2-orders-livinov
           heroku_email: boris.litvinov2017@yandex.ru
           appdir: order_service
       - name: Migrate Store
