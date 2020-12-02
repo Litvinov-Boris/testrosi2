@@ -43,6 +43,8 @@ def get_post_orders(request, userUid):
         orderN = OrdersSerializer(orderN, data = orderData)
         if orderN.is_valid():
             orderN.save()
+
+        warrantyReq = requests.post('https://lab2-warranty-litvinov.herokuapp.com/api/v1/warranty/{}'.format(warehousReq['orderItemUid']))
         return Response({"orderUid": serord.data["order_uid"]}, status=status.HTTP_200_OK)
 
     elif request.method == 'DELETE':
