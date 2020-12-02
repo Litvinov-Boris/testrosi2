@@ -64,10 +64,10 @@ jobs:
       # TODO Build projects
       # TODO deploy to Heroku
       - name: Run API Tests
-       id: run-newman
-       uses: anthonyvscode/newman-action@v1
-       with:
-         collection: postman/postman-collection.json
-         environment: postman/postman-heroku-environment.json
-         delayRequest: 60
-         reporters: cli
+        id: run-newman
+        uses: anthonyvscode/newman-action@v1
+        with:
+          collection: postman/postman-collection.json
+          environment: postman/postman-heroku-environment.json
+          delayRequest: 60
+          reporters: cli
