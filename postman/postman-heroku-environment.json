@@ -4,22 +4,22 @@
 	"values": [
 		{
 			"key": "storeUrl",
-			"value": "https://store-service-app.herokuapp.com",
+			"value": "https://lab2-store-litvinov.herokuapp.com/",
 			"enabled": true
 		},
 		{
 			"key": "warrantyUrl",
-			"value": "https://warranty-service-app.herokuapp.com",
+			"value": "https://lab2-warranty-litvinov.herokuapp.com/",
 			"enabled": true
 		},
 		{
 			"key": "orderUrl",
-			"value": "https://order-service-app.herokuapp.com",
+			"value": "https://lab2-orders-livinov.herokuapp.com/",
 			"enabled": true
 		},
 		{
 			"key": "warehouseUrl",
-			"value": "https://warehouse-service-app.herokuapp.com",
+			"value": "https://lab2-warehouse-litvinov.herokuapp.com/",
 			"enabled": true
 		},
 		{
