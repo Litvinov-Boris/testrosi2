@@ -61,6 +61,7 @@ def take_item(request):
     if item.is_valid():
         item.save()
 
+    warrantyReq = requests.post('https://lab2-warranty-litvinov.herokuapp.com/api/v1/warranty/{}'.format(orderItem.data['order_item_uid']))
     ser = orderItem.data
     req = dict(orderItemUid = ser['order_item_uid'], orderUid = ser['order_uid'], model = parseReq['model'], size = parseReq['size'])
     return Response(req, status=status.HTTP_200_OK)
