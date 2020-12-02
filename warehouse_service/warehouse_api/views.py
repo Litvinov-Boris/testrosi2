@@ -52,6 +52,8 @@ def take_item(request):
         return Response({'message':'Item not available'}, status=status.HTTP_409_CONFLICT)
     
     order = dict(order_uid = parseReq['orderUid'], item_id = itemData['id'])
+    if "orderItemUid" in parseReq:
+        order['order_item_uid'] = parseReq['orderItemUid']
     orderItem = Order_itemSerializer(data = order)
     if orderItem.is_valid():
         orderItem.save()

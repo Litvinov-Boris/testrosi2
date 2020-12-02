@@ -30,19 +30,11 @@ def get_post_orders(request, userUid):
         serord = OrdersSerializer(data = order)
         if serord.is_valid():
             serord.save()
-        parsReq.update({'orderUid': serord.data['order_uid']})
+        parsReq.update({'orderUid': serord.data['order_uid'], 'orderItemUid': serord.data["item_uid"]})
         warehousReq = requests.post('https://lab2-warehouse-litvinov.herokuapp.com/api/v1/warehouse', json= parsReq)
         if warehousReq.status_code == 404 or warehousReq.status_code == 409:
             return Response({'message':'Item not available'}, status=status.HTTP_409_CONFLICT)
         warehousReq = warehousReq.json()
-
-        orderN = Orders.objects.get(order_uid = serord.data['order_uid'])
-        orderData = OrdersSerializer(orderN).data
-        orderData['status'] = 'PAID'
-        orderData['item_uid'] = warehousReq['orderItemUid']
-        orderN = OrdersSerializer(orderN, data = orderData)
-        if orderN.is_valid():
-            orderN.save()
 
         warrantyReq = requests.post('https://lab2-warranty-litvinov.herokuapp.com/api/v1/warranty/{}'.format(warehousReq['orderItemUid']))
         return Response({"orderUid": serord.data["order_uid"]}, status=status.HTTP_200_OK)
