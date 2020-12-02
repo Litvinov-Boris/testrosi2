@@ -56,10 +56,11 @@ def get_post_orders(request, userUid):
         orderData = OrdersSerializer(order).data
         delreqwareh = requests.delete('https://lab2-warehouse-litvinov.herokuapp.com/api/v1/warehouse/{}'.format(orderData['item_uid']))
         delreqwarra = requests.delete('https://lab2-warranty-litvinov.herokuapp.com/api/v1/warranty/{}'.format(orderData['item_uid']))
-        orderData['status'] = 'REFUNDED'
-        order = OrdersSerializer(order, data= orderData)
-        if order.is_valid():
-            order.save()
+        # orderData['status'] = 'REFUNDED'
+        # order = OrdersSerializer(order, data= orderData)
+        # if order.is_valid():
+        #     order.save()
+        order.delete()
         return Response({"message":"Order returned"}, status=status.HTTP_204_NO_CONTENT)
 
 @api_view(['GET'])
