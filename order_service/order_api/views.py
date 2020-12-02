@@ -26,12 +26,12 @@ def get_post_orders(request, userUid):
         if (not('model' in parsReq)) or (not('size' in parsReq)):
             return Response({'message':'Bad request format'}, status = status.HTTP_400_BAD_REQUEST)
 
-        order = dict (status = 'BUILD', user_uid = userUid)
+        order = dict (status = 'PAID', user_uid = userUid)
         serord = OrdersSerializer(data = order)
         if serord.is_valid():
             serord.save()
         parsReq.update({'orderUid': serord.data['order_uid'], 'orderItemUid': serord.data["item_uid"]})
-        warehousReq = requests.post('https://lab2-warehouse-litvinov.herokuapp.com/api/v1/warehouse', json= parsReq)
+        warehousReq = requests.post('https://lab2-warehouse-litvinov.herokuapp.com/api/v1/warehouse/', json= parsReq)
         if warehousReq.status_code == 404 or warehousReq.status_code == 409:
             return Response({'message':'Item not available'}, status=status.HTTP_409_CONFLICT)
         warehousReq = warehousReq.json()
