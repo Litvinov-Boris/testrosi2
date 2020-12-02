@@ -43,7 +43,7 @@ def take_item(request):
         return Response({'message':'Bad request format'}, status=status.HTTP_400_BAD_REQUEST )
 
     try:
-        item = Items.objects.get(model = parseReq['model'])
+        item = Items.objects.get(model = parseReq['model'], size = parseReq['size'])
     except:
         return Response({'message':'Requested item not found'}, status=status.HTTP_404_NOT_FOUND)
     
